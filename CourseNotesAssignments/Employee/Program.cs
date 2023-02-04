@@ -4,7 +4,12 @@
     {
         static void Main(string[] args)
         {
-            var alfredo = new Employee(3123, "Alfredo Parreira Silva", 1.74, 2000.50m);
+
+            Console.Write("Enter employee name => ");
+            string name = Console.ReadLine();
+
+
+            var alfredo = new Employee(3123, name, 1.74, 2000.50m);
             Console.WriteLine($"Employee ID => {alfredo.Id}");
             Console.WriteLine($"Employee name => {alfredo.Name}");
             Console.WriteLine($"Employee Height => {alfredo.Height}");

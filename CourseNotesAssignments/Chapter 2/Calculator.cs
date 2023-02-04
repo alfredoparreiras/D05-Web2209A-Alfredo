@@ -1,41 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CalculatorProgram
 {
     internal class Calculator
     {
-        static void Main(string[] args)
-        {
-            double[] testing = { 13.1, 13.2, 13.8, 13.5, 16, 11, 20 };
-            GetMostCommonCharacter("Banana");
+        public Calculator() { }
 
-        }
-
-        public static double Sum(double x, double y)
+        public  double Sum(double x, double y)
         {
-            x = ReadDouble();
-            y = ReadDouble();
+            x = Validations.ReadDouble();
+            y = Validations.ReadDouble();
 
             return x + y;
         }
 
-        public static bool IsDivisibleBy(int x, int y)
+        public  bool IsDivisibleBy(int x, int y)
         {
-            x = ReadInt();
-            y = ReadInt();
+            x = Validations.ReadInt();
+            y = Validations.ReadInt();
             return x % y == 0;
         }
 
-        public static bool IsEven(int x)
+        public  bool IsEven(int x)
         {
-            x = ReadInt();
+            x = Validations.ReadInt();
 
             return x % 2 == 0;
         }
 
-        public static double GetMinimum(double[] numbers)
+        public  double GetMinimum(double[] numbers)
         {
             if (numbers == null)
             {
@@ -63,7 +60,7 @@ namespace CalculatorProgram
             return Minimum;
         }
 
-        public static void SortArray(double[] numbers)
+        public  void SortArray(double[] numbers)
         {
 
             if (numbers == null)
@@ -99,86 +96,66 @@ namespace CalculatorProgram
             }
         }
 
-        public static void GetMostCommonCharacter(string input)
+        public  void GetMostCommonCharacter(string input)
         {
-
+            // Validation
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
             if (input.Length == 0)
                 throw new ArgumentException("You need to insert a valid input value");
 
-            var characterCounts = new List<CharacterCount>();
-       
+            // Creating a List do store the character object
+            var characterCountsList = new List<CharacterCount>();
+
+            //Loop to check if a character exist, if exist will increase the counter if isn't will create a new object with counter set 1;
             for (var i = 0; i < input.Length; i++)
             {
                 char character = input[i];
-                CharacterCount characterCount = GetCharacterCount(characterCounts, character);
+                CharacterCount characterCount = GetCharacterCount(characterCountsList, character);
 
                 if (characterCount != null)
                 {
-                    characterCount.Count++;
+                    characterCountsList.Add(new)
                 }
                 else
                 {
-                    CharacterCount @char = new CharacterCount(input[i]);
-                    characterCounts.Add(@char);
+                    characterCount.Count++;
                 }
 
                 // Search characterCounts list to find whether it has this character in it
                 // If the list already contains, then increment the count
                 // Else create a new character count and add it to the list
 
-
-                foreach (CharacterCount test in characterCounts)
+                // Displayng the List 
+                foreach (CharacterCount test in characterCountsList)
                 {
                     Console.WriteLine($"The char is {test.Character} and the count is {test.Count} ");
                 }
             }
         }
 
-        private static CharacterCount GetCharacterCount(List<CharacterCount> characterCounts, char character)
+        private  CharacterCount GetCharacterCount(List<CharacterCount> characterCounts, char character)
         {
             for (var j = 0; j < characterCounts.Count; j++)
             {
-
+                if (characterCounts[j].Character == character)
+                {
+                    return characterCounts[j];
+                }
             }
             return null;
         }
 
-        private static int ReadInt()
+        internal class CharacterCount
         {
-            while (true)
+            public char Character { get; }
+            public int Count { get; set; }
+
+            public CharacterCount(char character)
             {
-                string input = Console.ReadLine();
-                if (int.TryParse(input, out int number))
-                    return number;
-                Console.WriteLine($"Error: {input} is not a Int number.");
+                this.Character = character;
+                Count = 1;
             }
-        }
-
-        private static double ReadDouble()
-        {
-            while (true)
-            {
-                string input = Console.ReadLine();
-                if (double.TryParse(input, out double number))
-                    return number;
-                Console.WriteLine($"Error: {input} is not a Double Number.");
-            }
-        }
-
-    }
-
-
-    internal class CharacterCount
-    {
-        public char Character { get; }
-        public int Count { get; set; }
-
-        public CharacterCount(char character)
-        {
-            this.Character = character;
-            Count = 1;
         }
     }
 }
