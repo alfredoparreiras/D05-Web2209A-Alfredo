@@ -6,7 +6,6 @@ namespace Chapter_1
     {
         static void Main(string[] args)
         {
-            Numbers();
 
         }
 
