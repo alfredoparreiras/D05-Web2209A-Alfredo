@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorProgram", "Chapte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeProgram", "Employee\EmployeeProgram.csproj", "{17ABE345-FDF2-461C-971A-AE41C4C8B6F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passport", "Passport\Passport.csproj", "{13D02265-32BD-48B9-8FB2-49587279D442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Passport", "Passport\Passport.csproj", "{13D02265-32BD-48B9-8FB2-49587279D442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingEnviroment", "TestingEnviroment\TestingEnviroment.csproj", "{9A1C1929-E77C-4CD1-8DF6-EF2AA2B93267}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{13D02265-32BD-48B9-8FB2-49587279D442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13D02265-32BD-48B9-8FB2-49587279D442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13D02265-32BD-48B9-8FB2-49587279D442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A1C1929-E77C-4CD1-8DF6-EF2AA2B93267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A1C1929-E77C-4CD1-8DF6-EF2AA2B93267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A1C1929-E77C-4CD1-8DF6-EF2AA2B93267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A1C1929-E77C-4CD1-8DF6-EF2AA2B93267}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
