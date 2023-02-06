@@ -4,11 +4,6 @@
     {
         static void Main(string[] args)
         {
-
-            Console.Write("Enter employee name => ");
-            string name = Console.ReadLine();
-
-
             var alfredo = new Employee(3123, name, 1.74, 2000.50m);
             Console.WriteLine($"Employee ID => {alfredo.Id}");
             Console.WriteLine($"Employee name => {alfredo.Name}");

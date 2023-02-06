@@ -12,23 +12,16 @@ namespace CalculatorProgram
 
         public  double Sum(double x, double y)
         {
-            x = Validations.ReadDouble();
-            y = Validations.ReadDouble();
-
             return x + y;
         }
 
         public  bool IsDivisibleBy(int x, int y)
-        {
-            x = Validations.ReadInt();
-            y = Validations.ReadInt();
+        { 
             return x % y == 0;
         }
 
         public  bool IsEven(int x)
         {
-            x = Validations.ReadInt();
-
             return x % 2 == 0;
         }
 
@@ -43,18 +36,13 @@ namespace CalculatorProgram
                 throw new ArgumentNullException("Numbers array must not be empty.", nameof(numbers));
             }
 
-            double Minimum = 0;
+            double Minimum = double.MaxValue;
 
 
             for (var i = 0; i < numbers.Length; i++)
             {
-                for (var j = 0; j < numbers.Length; j++)
-                {
-                    if (numbers[i] < numbers[j])
-                    {
-                        Minimum = numbers[i];
-                    }
-                }
+                if (numbers[i] < Minimum)
+                    Minimum = numbers[i];
             }
 
             return Minimum;
@@ -92,69 +80,73 @@ namespace CalculatorProgram
 
             foreach (double number in numbers)
             {
-                Console.Write(number + " - ");
+                Console.Write(number + " ");
             }
+            Console.WriteLine('\n');
         }
 
-        public  void GetMostCommonCharacter(string input)
+        // Method solution created by @Jared Chevalier
+        public char GetMostCommonChaacter(string text)
         {
-            // Validation
-            if (input == null)
-                throw new ArgumentNullException(nameof(input));
-            if (input.Length == 0)
-                throw new ArgumentException("You need to insert a valid input value");
+            if (text == null)
+                throw new ArgumentNullException(nameof(text));
+            if (text.Length == 0)
+                throw new ArgumentException("Text must not be empty.", nameof(text));
 
-            // Creating a List do store the character object
-            var characterCountsList = new List<CharacterCount>();
+            if (text.Length == 1)
+                return text[0];
 
-            //Loop to check if a character exist, if exist will increase the counter if isn't will create a new object with counter set 1;
-            for (var i = 0; i < input.Length; i++)
+            List<CharacterCount> characterCounts = GetCharacterCounts(text);
+            CharacterCount mostCommonCharacterCount = GetMostCommonCharacterCount(characterCounts);
+            return mostCommonCharacterCount.Character;
+        }
+
+        private static List<CharacterCount> GetCharacterCounts(string text)
+        {
+            List<CharacterCount> characterCounts = new List<CharacterCount>();
+
+            foreach (char character in text)
             {
-                char character = input[i];
-                CharacterCount characterCount = GetCharacterCount(characterCountsList, character);
-
-                if (characterCount != null)
-                {
-                    characterCountsList.Add(new)
-                }
+                CharacterCount characterCount = GetCharacterCount(characterCounts, character);
+                if (characterCount == null)
+                    characterCounts.Add(new CharacterCount(character, 1));
                 else
-                {
                     characterCount.Count++;
-                }
-
-                // Search characterCounts list to find whether it has this character in it
-                // If the list already contains, then increment the count
-                // Else create a new character count and add it to the list
-
-                // Displayng the List 
-                foreach (CharacterCount test in characterCountsList)
-                {
-                    Console.WriteLine($"The char is {test.Character} and the count is {test.Count} ");
-                }
             }
+
+            return characterCounts;
         }
 
-        private  CharacterCount GetCharacterCount(List<CharacterCount> characterCounts, char character)
+        private static CharacterCount GetCharacterCount(List<CharacterCount> characterCounts, char character)
         {
-            for (var j = 0; j < characterCounts.Count; j++)
+            foreach (CharacterCount characterCount in characterCounts)
             {
-                if (characterCounts[j].Character == character)
-                {
-                    return characterCounts[j];
-                }
+                if (characterCount.Character == character)
+                    return characterCount;
             }
             return null;
         }
 
-        internal class CharacterCount
+        private static CharacterCount GetMostCommonCharacterCount(List<CharacterCount> characterCounts)
         {
-            public char Character { get; }
-            public int Count { get; set; }
-
-            public CharacterCount(char character)
+            CharacterCount mostCommon = null;
+            foreach (CharacterCount characterCount in characterCounts)
             {
-                this.Character = character;
-                Count = 1;
+                if (mostCommon == null || characterCount.Count > mostCommon.Count)
+                    mostCommon = characterCount;
+            }
+            return mostCommon;
+        }
+
+        private class CharacterCount
+        {
+            public readonly char Character;
+            public int Count;
+
+            public CharacterCount(char character, int count)
+            {
+                Character = character;
+                Count = count;
             }
         }
     }

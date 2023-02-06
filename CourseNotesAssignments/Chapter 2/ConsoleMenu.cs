@@ -21,15 +21,15 @@ namespace CalculatorProgram
         public int DisplayAndGetUserInput()
         {
             int selection = 0;
-            do
-            {
-                DisplayTitle();
-                DisplaySeparator();
-                DisplayOptions();
-                selection = ReadInt("You need to type a number");
-            } while (selection != options.Count || selection > options.Count);
-
+          
+            DisplayTitle();
+            DisplaySeparator();
+            DisplayOptions();
+            
+            selection = ReadInt("You need to type a number");
+            
             DisplayMessage(selection);
+           
             return selection;
         }
 
@@ -56,16 +56,18 @@ namespace CalculatorProgram
             Console.Write("\nPlease select an option => ");
         }
 
-        // Message to confirm the user input.
+        /// <summary>
+        /// Method to display if the option was correctly selected.
+        /// </summary>
+        /// <param name="selection">Input from user's keyboard. </param>
+        /// 
         private void DisplayMessage(int selection)
         {
             if(message == null)
-                Console.WriteLine($"Option {selection} selected with sucess");
+                Console.WriteLine($"\nOption {selection} selected with sucess\n");
             else
-                Console.WriteLine($"Option {selection}, {message}");
-
+                Console.WriteLine($"\nOption {selection}, {message}\n");
         }
-        
         
         // Method to check if user's input is an Integer.
         private int ReadInt(string message)
