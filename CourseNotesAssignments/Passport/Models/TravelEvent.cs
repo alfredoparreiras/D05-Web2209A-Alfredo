@@ -9,15 +9,15 @@ namespace Passport
     internal class TravelEvent
     {   
         //Automatic Properties 
-        private int PassportID { get; }
-        private string Country { get; }
+        private string PassportID { get; }
+        public string Country { get; }
         private DateTime TimeOfEntry { get; }
 
         //Calculated Properties
         public TimeSpan GetTimeSpan => DateTime.UtcNow - TimeOfEntry; 
 
 
-        public TravelEvent(int passportID, string country, DateTime timeOfEntry)
+        public TravelEvent(string passportID, string country, DateTime timeOfEntry)
         {
             PassportID = passportID;
             Country = country;

@@ -36,7 +36,7 @@ namespace TestingEnviroment
             //string id = builder.ToString();
             //Console.WriteLine(id);
 
-            var date = new 
+            var date = new DateTime(2023, 02, 07);
         }
 
 

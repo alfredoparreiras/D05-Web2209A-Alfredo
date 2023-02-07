@@ -19,7 +19,7 @@ namespace Passport
                 Console.WriteLine( $"Error : {input} is not a valid input.\n");
             }
         }
-
+        
         public static double ValidateDouble()
         {
             while(true)
@@ -38,7 +38,7 @@ namespace Passport
             if (input == null)
                 throw new ArgumentNullException("First Name is Null, please insert a Value");
 
-            else if (input.Length > 0)
+            else if (input.Length == 0)
                 throw new ArgumentException("First Name must be inserted");
 
             return true;
