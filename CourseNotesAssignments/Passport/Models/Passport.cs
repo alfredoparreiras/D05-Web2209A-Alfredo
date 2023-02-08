@@ -5,7 +5,14 @@
         // Calculated Properties 
         public string GetFullName => string.Concat(FirstName," ",LastName);
         //TODO: Create more accurate method. 
-        public int GetAge => DateTime.Now.Year - dateOfBirth.Year;
+        public int GetAge
+        {
+            get
+            {
+                TimeSpan age = (DateTime.Now - dateOfBirth) / 366;
+                return age.Days;
+            }
+        }
         public string CurrentLocation
         {
             get
@@ -14,7 +21,6 @@
                 //return travelHistory[travelHistory.Count - 1].ToString();
             }
         }
-
         public bool IsTravelling
         {
             get
@@ -24,7 +30,7 @@
                 return false;
             }
         }
-
+        //Properties
         public string Id
         {
             get
@@ -33,13 +39,16 @@
             }
         }
         
-        // Properties 
-        private string id; 
+        // Automatic Properties 
         private string FirstName { set; get; }
         private string LastName { set; get; }
+        
+        // Data Fields 
+        private string id; 
         private DateTime dateOfBirth;
+        public DateTime PassportCreation;
         private readonly string countryOfResidence;
-        private List<TravelEvent> travelHistory;
+        private readonly List<TravelEvent> travelHistory;
     
         public Passport(string firstName, string lastName, DateTime dateOfBirth, string countryOfResidence)
         {
@@ -54,7 +63,7 @@
                 this.LastName = lastName;
 
             //Check if date of birthe can be used as a valid date;
-            if (Validations.ValidateDateTime(dateOfBirth))
+            if (Validations.ValidateDateOfBirth(dateOfBirth))
                 this.dateOfBirth = dateOfBirth;
 
             //Check if country is a valid input
@@ -67,16 +76,16 @@
             // Adding Travel Event 
             travelHistory = new List<TravelEvent>();
             travelHistory.Add(initialTravel);
-            
+            PassportCreation = initialTravel.TimeOfEntry;
+
         }
         public override string ToString()
         {
             return $"Passport ID : {Id}\n" +
                    $"Name : {FirstName + " " + LastName}\n" +
                    $"Country Of Residence: {countryOfResidence}\n" +
-                   $"Current Country: {travelHistory[travelHistory.Count - 1].Country}\n";
+                   $"Current Country: {travelHistory[^1].Country}\n";
         }
-
         public void Travelling(string country, DateTime timeOfEntry)
         {
             var newTravel = new TravelEvent(this.Id, country, timeOfEntry);

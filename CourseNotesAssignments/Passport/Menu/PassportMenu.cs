@@ -11,6 +11,7 @@ namespace Passport.Menu
 {
     internal class PassportMenu
     {
+        // Private Fields 
         private ConsoleMenu consoleMenu;
         private List<string> menuOptions;
         private readonly Dictionary<string, Models.Passport> passportsDataBase = new Dictionary<string, Models.Passport>();
@@ -72,24 +73,19 @@ namespace Passport.Menu
                 
                 if(selection == menuOptions.Count)
                     Console.WriteLine("Logging out of the system");
-                
             } while (selection != menuOptions.Count);
         }
-
         private void AddCitizenTravel()
         {
             string userInput = UserIdInput();
             Console.Write("Please insert citizen's country of Destination: ");
             string countryOfDestination = Validations.ValidateNameWithInput();
             
-            //TODO: Validate dateOfEntry
             Console.Write("Please insert citizen's date of entry: ");
             DateTime dateOfEntry = DateTime.Parse(Console.ReadLine());
-            
-            passportsDataBase[userInput].Travelling(countryOfDestination, dateOfEntry);
-            
+            if(Validations.ValidateDateOfTravel(dateOfEntry,passportsDataBase[userInput]))
+                passportsDataBase[userInput].Travelling(countryOfDestination, dateOfEntry);
         }
-
         private void DeletePassport()
         {
             string userInput = UserIdInput();
@@ -99,7 +95,6 @@ namespace Passport.Menu
             Console.WriteLine($"{temp.ToString()}\nWas sucessfully deleted.");
             Console.ForegroundColor = ConsoleColor.White;
         }
-
         private void AddNewPassport()
         {
             //TODO: Check if there is another passport with same name?
@@ -118,16 +113,12 @@ namespace Passport.Menu
 
             var newPassport = new Models.Passport(firstName, lastName, dateOfBirth, countryOfResidence);
             passportsDataBase.Add(newPassport.Id,newPassport);
-
         }
-
         private void DisplaySpecificPassport()
         {
             string userInput = UserIdInput();
             Console.WriteLine($"\nDisplaying Passport information : \n\n{passportsDataBase[userInput].ToString()}\n.");
         }
-
-
         public void DisplayAllPassports()
         {
             foreach (KeyValuePair<string, Models.Passport> passport in passportsDataBase)
@@ -138,7 +129,7 @@ namespace Passport.Menu
         private static string UserIdInput()
         {
             Console.Write("Please enter the passport ID : ");
-            string userInput = Validations.ValidateNameWithInput();
+            string userInput = Validations.ValidatePassportId();
             return userInput;
         }
     }

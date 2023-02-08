@@ -36,11 +36,16 @@ namespace TestingEnviroment
             //string id = builder.ToString();
             //Console.WriteLine(id);
 
-            Console.Write("Enter a date :  ");
-            DateTime dateAdd = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine(dateAdd);
+            // Console.Write("Enter a date :  ");
+            // DateTime dateAdd = DateTime.Parse(Console.ReadLine());
+            // Console.WriteLine(dateAdd);
+
+            var today = DateTime.Now;
+            var dateOfBirth = new DateTime(1990, 09, 19);
+            var age = (today - dateOfBirth) / 366;
+            Console.WriteLine(age.Days);
+
         }
-
-
+        
         }
     }

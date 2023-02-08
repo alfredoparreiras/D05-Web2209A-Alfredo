@@ -39,7 +39,7 @@ namespace Passport.Menu
 
         private void DisplayMenuTitle()
         {
-            Console.WriteLine(title + "\n");
+            Console.WriteLine(title);
         }
 
         private void DisplayMenuSeparator()
