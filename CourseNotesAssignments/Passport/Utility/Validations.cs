@@ -42,6 +42,16 @@ namespace Passport
                 throw new ArgumentException("First Name must be inserted");
 
             return true;
+        }  public static string ValidateNameWithInput()
+        {
+            string input = Console.ReadLine();
+            if (input == null)
+                throw new ArgumentNullException("First Name is Null, please insert a Value");
+
+            else if (input.Length == 0)
+                throw new ArgumentException("First Name must be inserted");
+
+            return input;
         }
 
         public static bool ValidateDateTime(DateTime input)

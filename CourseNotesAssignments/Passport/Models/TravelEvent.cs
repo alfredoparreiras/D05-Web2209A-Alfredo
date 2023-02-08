@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Passport
+﻿namespace Passport.Models
 {
     internal class TravelEvent
     {   
         //Automatic Properties 
-        private string PassportID { get; }
+        private string PassportId { get; }
         public string Country { get; }
         private DateTime TimeOfEntry { get; }
 
@@ -17,21 +11,18 @@ namespace Passport
         public TimeSpan GetTimeSpan => DateTime.UtcNow - TimeOfEntry; 
 
 
-        public TravelEvent(string passportID, string country, DateTime timeOfEntry)
+        public TravelEvent(string passportId, string country, DateTime timeOfEntry)
         {
-            PassportID = passportID;
+            PassportId = passportId;
             Country = country;
             TimeOfEntry = timeOfEntry;
         }
 
-        
         public override string ToString()
         {
-            return $"Passport ID : {PassportID}\n" +
+            return $"Passport ID : {PassportId}\n" +
                    $"Country : {Country}\n" +
                    $"Time Of Entry : {TimeOfEntry}\n";
         }
-
-
     }
 }

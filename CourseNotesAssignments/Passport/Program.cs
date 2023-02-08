@@ -6,10 +6,8 @@ namespace Passport
     {
         static void Main(string[] args)
         {
-      
-            
-
-
+            var menu = new PassportMenu();
+            menu.Start();
         }
     }
 }

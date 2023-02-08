@@ -31,7 +31,7 @@ namespace Passport.Menu
 
             selection = Validations.ValidateInt();
 
-            Console.WriteLine($"Your option ({selection}) was sucessfully selected\n Loading...\n");
+            Console.WriteLine($"Your option ({selection}) was sucessfully selected\nLoading...\n");
 
             return selection;
 
@@ -58,6 +58,12 @@ namespace Passport.Menu
         private void DisplayMenuUserChoice()
         {
             Console.Write($"\nPlease choose one option between 1 and {menuOptions.Count} : ");
+        }
+        
+        //TODO: Confirm with @Jared why protect isn't work in PassporMenu.cs.
+        public static void DisplayReturnMessage()
+        {
+            Console.WriteLine("Press any key to return to the menu.");
         }
     }
 }

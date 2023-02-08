@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Passport
+﻿namespace Passport.Models
 {
     internal class Passport
     {
-        
         // Calculated Properties 
         public string GetFullName => string.Concat(FirstName," ",LastName);
+        //TODO: Create more accurate method. 
         public int GetAge => DateTime.Now.Year - dateOfBirth.Year;
-
         public string CurrentLocation
         {
             get
@@ -31,9 +24,17 @@ namespace Passport
                 return false;
             }
         }
+
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+        }
         
         // Properties 
-        private readonly string id;
+        private string id; 
         private string FirstName { set; get; }
         private string LastName { set; get; }
         private DateTime dateOfBirth;
@@ -61,7 +62,7 @@ namespace Passport
                 this.countryOfResidence = countryOfResidence;   
             
             //Creating Travel Event 
-            var initialTravel = new TravelEvent(id, this.countryOfResidence, DateTime.UtcNow);
+            var initialTravel = new TravelEvent(Id, this.countryOfResidence, DateTime.UtcNow);
             
             // Adding Travel Event 
             travelHistory = new List<TravelEvent>();
@@ -70,14 +71,15 @@ namespace Passport
         }
         public override string ToString()
         {
-            return $"Passport ID : {id}\n" +
-                   $"Name : {FirstName + " " +  LastName}\n" +
-                   $"Country Of Residence: {countryOfResidence}\n";
+            return $"Passport ID : {Id}\n" +
+                   $"Name : {FirstName + " " + LastName}\n" +
+                   $"Country Of Residence: {countryOfResidence}\n" +
+                   $"Current Country: {travelHistory[travelHistory.Count - 1].Country}\n";
         }
 
         public void Travelling(string country, DateTime timeOfEntry)
         {
-            var newTravel = new TravelEvent(this.id, country, timeOfEntry);
+            var newTravel = new TravelEvent(this.Id, country, timeOfEntry);
             travelHistory.Add(newTravel);
         }
     }
