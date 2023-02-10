@@ -25,7 +25,6 @@ namespace WFPApplication
         {
             InitializeComponent();
             DataContext = new StudentListViewModel();
-
         } 
     }
 }

@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="PassportApp\**" />
+    <EmbeddedResource Remove="PassportApp\**" />
+    <None Remove="PassportApp\**" />
+  </ItemGroup>
+
 </Project>
