@@ -23,6 +23,7 @@ namespace PassportApp.Views
         public MainWindow()
         {
             InitializeComponent();
+          
         }
     }
 }

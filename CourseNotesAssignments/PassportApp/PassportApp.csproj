@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Utility\Chevalier.Utility\Chevalier.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
+
 </Project>

@@ -5,48 +5,129 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PassportApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700">
+             d:DesignHeight="550" d:DesignWidth="700"
+             FontFamily="Tahoma">
     <UserControl.Resources>
         <Style TargetType="Button">
-            <Setter Property="Padding" Value="7.5"></Setter>
+            <Setter Property="Padding" Value="7.5"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Separator">
+            <Setter Property="Width" Value="75"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Height" Value="5"/>
         </Style>
     </UserControl.Resources>
-    
-    <DockPanel>
-        <StackPanel VerticalAlignment="Center" DockPanel.Dock="Right" Width="200" Margin="20" Height="398" Background="DarkGray">
-            <Label Content="Add Passport" FontSize="16"/>
+
+    <DockPanel Background="#e0e2db">
+        <Grid DockPanel.Dock="Top" Height="30">
+            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="Passport System Control v2"/>
+        </Grid>
+        <StackPanel VerticalAlignment="Center" 
+                    DockPanel.Dock="Right" 
+                    Width="200" Margin="20">
+            <TextBlock HorizontalAlignment="Center" 
+                       Text="Add Passport" 
+                       FontSize="16"/>
             <Label Content="First Name"/>
-            <Separator Width="75" Height="5" Background="Transparent"/>
+            <Separator/>
             <TextBox Text="{Binding Path=FirstName}"/>
-            <Separator Width="75" Height="5" Background="Transparent"/>
+            <Separator />
             <Label Content="Last Name"/>
             <TextBox Text="{Binding Path=LastName}"/>
-            <Separator Width="75" Height="5" Background="Transparent"/>
+            <Separator />
             <Label Content="Date Of Birth"/>
             <DatePicker SelectedDate="{Binding Path=DateOfBirth}"/>
-            <Separator Width="75" Height="5" Background="Transparent"/>
+            <Separator />
             <Label Content="Country Of Residence"/>
             <TextBox Text="{Binding Path=ResidenceCountry}"/>
-            <Separator Width="75" Height="5" Background="Transparent"/>
-            <Button Content="Submit" Width="100" Command="{Binding Path=AddPassportCommand}"/>
-            <Separator Width="75" Height="5" Background="Transparent"/>
+            <Separator />
+            <Button Content="Submit"
+                    Command="{Binding Path=AddPassportCommand}">
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="100" 
+                                Height="30"
+                                CornerRadius="15"
+                                Background="Black">
+                            <ContentPresenter   
+                                VerticalAlignment="center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Separator />
+            <Separator />
+            <Separator />
+            <Separator />
+        <StackPanel VerticalAlignment="Bottom" DockPanel.Dock="Bottom"  Width="200" Height="150">
+            <Label Content="Add a Travel"
+                   HorizontalAlignment="Center"
+                   FontSize="16"/>
+            <Label Content="Destinantion" 
+                   HorizontalContentAlignment="Center"/>
+            <TextBox 
+                Text="{Binding Path=DestinationCountry,
+                UpdateSourceTrigger=PropertyChanged}"
+                Width="240 "/>
+                <Button Content="Travel" 
+                     Command="{Binding Path=TravelCommand}"
+                     Margin="10,10,10,10">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="100" 
+                                Height="30"
+                                CornerRadius="15"
+                                Background="Black">
+                                <ContentPresenter   
+                                VerticalAlignment="center"
+                                HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
         </StackPanel>
         <DockPanel>
-            <StackPanel DockPanel.Dock="Bottom" Width="250" Height="100">
-                <Label Content="Destinantion" HorizontalContentAlignment="Center"/>
-                <TextBox Text="{Binding Path=DestinationCountry,UpdateSourceTrigger=PropertyChanged}" Width="240 "/>
-                <Button Content="Travel" Command="{Binding Path=TravelCommand}" Width="120" Margin="10,10,10,10"/>
-            </StackPanel>
-            <DataGrid AutoGenerateColumns="False" SelectionMode="Single" HorizontalContentAlignment="Center" ItemsSource="{Binding Path=Passports}" SelectedItem="{Binding Path=SelectedPassport}" >
+            <DataGrid AutoGenerateColumns="False" 
+                      SelectionMode="Single"     
+                      HorizontalContentAlignment="Center"
+                      ItemsSource="{Binding Path=Passports}"
+                      SelectedItem="{Binding Path=SelectedPassport}" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" IsReadOnly="true" Binding="{Binding Path=Id,UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName,UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Date Of Birth" IsReadOnly="true" Binding="{Binding Path=DateOfBirth,UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Age" IsReadOnly="true" Binding="{Binding Path=GetAge,UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Country" IsReadOnly="true" Binding="{Binding Path=CountryOfResidence,UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Current Location" IsReadOnly="True" Binding="{Binding Path=CurrentLocation,UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Traveling" IsReadOnly="true" Binding="{Binding Path=IsTravelling,UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Id" 
+                                        IsReadOnly="true"
+                                        Binding="{Binding Path=Id,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="First Name" 
+                                        Binding="{Binding Path=FirstName,  
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Last Name"
+                                        Binding="{Binding Path=LastName,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Date Of Birth" 
+                                        IsReadOnly="true" 
+                                        Binding="{Binding Path=DateOfBirth,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Age"
+                                        IsReadOnly="true" 
+                                        Binding="{Binding Path=GetAge,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Country" 
+                                        IsReadOnly="true" 
+                                        Binding="{Binding Path=CountryOfResidence,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Current Location"
+                                        IsReadOnly="True" 
+                                        Binding="{Binding Path=CurrentLocation,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Traveling"
+                                        IsReadOnly="true" 
+                                        Binding="{Binding Path=IsTravelling,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
