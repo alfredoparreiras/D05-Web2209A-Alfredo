@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Passport.Models
+namespace PassportApp.Models
 {
     internal class Passport
     {
         // Calculated Properties 
         public string GetFullName => string.Concat(FirstName," ",LastName);
-        //TODO: Create more accurate method. 
         public int GetAge
         {
             get
             {
-                TimeSpan age = (DateTime.Now - dateOfBirth) / 366;
+                TimeSpan age = (DateTime.Now - DateOfBirth) / 366;
                 return age.Days;
             }
         }
@@ -20,7 +19,7 @@ namespace Passport.Models
         {
             get
             {
-                return travelHistory[^1].ToString();
+                return travelHistory[^1].Country;
                 //return travelHistory[travelHistory.Count - 1].ToString();
             }
         }
@@ -28,7 +27,7 @@ namespace Passport.Models
         {
             get
             {
-                if (travelHistory[^1].Country != countryOfResidence)
+                if (travelHistory[^1].Country != CountryOfResidence)
                     return true;
                 return false;
             }
@@ -43,17 +42,17 @@ namespace Passport.Models
         }
         
         // Automatic Properties 
-        private string FirstName { set; get; }
-        private string LastName { set; get; }
+        public string FirstName { set; get; }
+        public string LastName { set; get; }
+        public string CountryOfResidence { get; }
+        public DateTime DateOfBirth { get; }
         
         // Data Fields 
         private string id; 
-        private DateTime dateOfBirth;
         public DateTime PassportCreation;
-        private readonly string countryOfResidence;
         private readonly List<TravelEvent> travelHistory;
     
-        public Passport(string firstName, string lastName, DateTime dateOfBirth, string countryOfResidence, GeneratedID generatedID)
+        public Passport(string firstName, string lastName, DateTime dateOfBirth, string countryOfResidence)
         {
             id = GeneratedID.GenerateId();
 
@@ -67,14 +66,14 @@ namespace Passport.Models
 
             //Check if date of birthe can be used as a valid date;
             if (Validations.ValidateDateOfBirth(dateOfBirth))
-                this.dateOfBirth = dateOfBirth;
+                this.DateOfBirth = dateOfBirth;
 
             //Check if country is a valid input
             if(Validations.ValidateName(countryOfResidence))
-                this.countryOfResidence = countryOfResidence;   
+                this.CountryOfResidence = countryOfResidence;   
             
             //Creating Travel Event 
-            var initialTravel = new TravelEvent(Id, this.countryOfResidence, DateTime.UtcNow);
+            var initialTravel = new TravelEvent(Id, this.CountryOfResidence, DateTime.UtcNow);
             
             // Adding Travel Event 
             travelHistory = new List<TravelEvent>();
@@ -86,7 +85,7 @@ namespace Passport.Models
         {
             return $"Passport ID : {Id}\n" +
                    $"Name : {FirstName + " " + LastName}\n" +
-                   $"Country Of Residence: {countryOfResidence}\n" +
+                   $"Country Of Residence: {CountryOfResidence}\n" +
                    $"Current Country: {travelHistory[^1].Country}\n";
         }
         public void Travelling(string country, DateTime timeOfEntry)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PassportApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace PassportApp.Views
         public PassportListView()
         {
             InitializeComponent();
+            DataContext = new PassportListViewModel();
         }
     }
 }

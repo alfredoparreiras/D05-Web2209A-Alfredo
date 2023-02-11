@@ -5,27 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PassportApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" HorizontalContentAlignment="Center">
+             d:DesignHeight="450" d:DesignWidth="550">
+    
+ 
+    
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Width="250" Height="100">
+            <Label Content="Destinantion" HorizontalContentAlignment="Center"/>
+            <TextBox Width="240 "/>
+            <Button Content="Travel" Width="120" Margin="10,10,10,10"/>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" HorizontalContentAlignment="Center" ItemsSource="{Binding Path=Passports}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" IsReadOnly="true" Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
                 <DataGridTextColumn Header="Date Of Birth" Binding="{Binding Path=DateOfBirth}"/>
-                <DataGridTextColumn Header="Age" IsReadOnly="true" Binding="{Binding Path=Age}"/>
-                <DataGridTextColumn Header="Country" Binding="{Binding Path=Country}"/>
+                <DataGridTextColumn Header="Age" IsReadOnly="true" Binding="{Binding Path=GetAge}"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Path=CountryOfResidence}"/>
                 <DataGridTextColumn Header="Current Location" Binding="{Binding Path=CurrentLocation}"/>
-                <DataGridTextColumn Header="Traveling" Binding="{Binding Path=Traveling}"/>
+                <DataGridTextColumn Header="Traveling" Binding="{Binding Path=IsTravelling}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Separator Height="15"/>
-        <StackPanel>
-            <Label Content="Destinantion"/>
-            <TextBox Width="240 "/>
-        <Separator Height="15"/>
-            <Button Content="Travel" Width="120"/>
-        <Separator Height="15"/>
-        </StackPanel>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Passport.Models
+namespace PassportApp.Models
 {
     internal class TravelEvent
     {   

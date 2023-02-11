@@ -9,7 +9,7 @@
         {
             get
             {
-                TimeSpan age = (DateTime.Now - dateOfBirth) / 366;
+                TimeSpan age = (DateTime.Now - dateOfBirth) / 366; 
                 return age.Days;
             }
         }
@@ -84,7 +84,8 @@
             return $"Passport ID : {Id}\n" +
                    $"Name : {FirstName + " " + LastName}\n" +
                    $"Country Of Residence: {countryOfResidence}\n" +
-                   $"Current Country: {travelHistory[^1].Country}\n";
+                   $"Current Country: {travelHistory[^1].Country}\n" +
+                   $"Age : {GetAge}";
         }
         public void Travelling(string country, DateTime timeOfEntry)
         {

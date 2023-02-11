@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Passport.Models;
+using PassportApp.Models;
 
-namespace Passport
+namespace PassportApp
 {
     internal class Validations
     {
