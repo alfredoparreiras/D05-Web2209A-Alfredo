@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingEnviroment", "Testin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassportApp", "PassportApp\PassportApp.csproj", "{26AE36C4-33E0-4F5E-B341-97C7F282337F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chevalier.Utility", "Utility\Chevalier.Utility\Chevalier.Utility.csproj", "{036D7DC9-CF41-40B8-AF89-6B7A5400FCAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{26AE36C4-33E0-4F5E-B341-97C7F282337F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26AE36C4-33E0-4F5E-B341-97C7F282337F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26AE36C4-33E0-4F5E-B341-97C7F282337F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{036D7DC9-CF41-40B8-AF89-6B7A5400FCAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{036D7DC9-CF41-40B8-AF89-6B7A5400FCAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{036D7DC9-CF41-40B8-AF89-6B7A5400FCAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{036D7DC9-CF41-40B8-AF89-6B7A5400FCAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
