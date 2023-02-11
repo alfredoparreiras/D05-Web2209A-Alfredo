@@ -96,5 +96,7 @@ namespace PassportApp.Models
             NotifyPropertyChanged(nameof(IsTravelling));
             NotifyPropertyChanged(nameof(CurrentLocation));
         }
+
+
     }
 }

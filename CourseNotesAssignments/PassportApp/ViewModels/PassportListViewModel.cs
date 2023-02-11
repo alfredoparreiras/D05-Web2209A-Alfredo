@@ -8,13 +8,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Controls;
 
 namespace PassportApp.ViewModels
 {
     class PassportListViewModel : ViewModel
     {
         public ObservableCollection<Passport> Passports { get; }
+        // Add Travel Section
         public Passport SelectedPassport
         {
             get
@@ -42,9 +43,69 @@ namespace PassportApp.ViewModels
         }
         public DelegateCommand TravelCommand { get; }
 
+        // Add Passport Section
+        public string FirstName
+        {
+            get
+            {
+                return firstName;
+            }
+            set
+            {
+                firstName = value;
+                AddPassportCommand.NotifyCanExecuteChanged();
+            }
+        }
+
+        public string LastName
+        {
+            get
+            {
+                return lastName; 
+            }
+            set
+            {
+                lastName = value;
+                AddPassportCommand.NotifyCanExecuteChanged();
+            }
+        }
+
+        public DateTime? DateOfBirth
+        {
+            get
+            {
+                return dateOfBirth;
+            }
+            set
+            {
+                dateOfBirth = value;
+                AddPassportCommand.NotifyCanExecuteChanged();
+            }
+        }
+
+        public string ResidenceCountry
+        {
+            get
+            {
+                return residenceCountry;
+            }
+            set
+            {
+                residenceCountry = value;
+                AddPassportCommand.NotifyCanExecuteChanged();
+            }
+        }
+        public DelegateCommand AddPassportCommand { get; }
+
+
+    
         //Instance Fields
         private string destinationCountry;
-        private Passport selectedPassport; 
+        private Passport selectedPassport;
+        private string firstName;
+        private string lastName;
+        private DateTime? dateOfBirth;
+        private string residenceCountry;
 
 
         public PassportListViewModel()
@@ -61,6 +122,7 @@ namespace PassportApp.ViewModels
             Passports.Add(passport4);
 
             TravelCommand = new DelegateCommand(Travel,CanTravel);
+            AddPassportCommand = new DelegateCommand(AddPassport, CanAddPassport);
 
         }
 
@@ -70,7 +132,6 @@ namespace PassportApp.ViewModels
         /// <param name="_"></param>
         private void Travel(object _)
         {
-          
             SelectedPassport.Travelling(DestinationCountry, DateTime.Now);
 
             //Clear Fiel 
@@ -78,13 +139,36 @@ namespace PassportApp.ViewModels
 
             //Updating the View
             NotifyPropertyChanged(nameof(DestinationCountry)); 
-
-
         }
-
         private bool CanTravel(object _)
         {
             return SelectedPassport is not null && !string.IsNullOrWhiteSpace(DestinationCountry);
+        }
+
+        // Add Passport Section 
+        private void AddPassport(object _)
+        {
+            var newPassport = new Passport(FirstName, LastName, DateOfBirth.Value, residenceCountry);
+
+            // Adding passport to the collection
+            Passports.Add(newPassport);
+
+            // Cleaning Entry Fields;
+            FirstName = string.Empty;
+            NotifyPropertyChanged(nameof(FirstName));
+            LastName = string.Empty;
+            NotifyPropertyChanged(nameof(LastName));
+            ResidenceCountry = string.Empty;
+            NotifyPropertyChanged(nameof(ResidenceCountry));
+            DateOfBirth = DateTime.Today;
+            NotifyPropertyChanged(nameof(DateOfBirth));
+        }
+        private bool CanAddPassport(object _) 
+        {
+            return !string.IsNullOrWhiteSpace(FirstName)
+                && !string.IsNullOrWhiteSpace(LastName)
+                && !string.IsNullOrWhiteSpace(ResidenceCountry)
+                && DateOfBirth.HasValue;
         }
     }
 }
