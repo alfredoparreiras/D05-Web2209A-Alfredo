@@ -1,4 +1,5 @@
 ﻿using Chevalier.Utility.Commands;
+using Chevalier.Utility.ViewModels;
 using PassportApp.Models;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,41 @@ using System.Threading.Tasks;
 
 namespace PassportApp.ViewModels
 {
-    class PassportListViewModel
+    class PassportListViewModel : ViewModel
     {
         public ObservableCollection<Passport> Passports { get; }
-        public Passport SelectedPassport { get; set; }
-        public string DestinationCountry { get; set; }
-        public DelegateCommand TravelCommand { get; } 
+        public Passport SelectedPassport
+        {
+            get
+            {
+                return selectedPassport;
+            }
+            set
+            {
+                selectedPassport = value;
+                TravelCommand.NotifyCanExecuteChanged();
+            }
+        }
+        public string DestinationCountry 
+        {
+            get
+            {
+                return destinationCountry; 
+            }
+            set
+            {
+                destinationCountry = value;
+                TravelCommand.NotifyCanExecuteChanged();
+
+            }
+        }
+        public DelegateCommand TravelCommand { get; }
+
+        //Instance Fields
+        private string destinationCountry;
+        private Passport selectedPassport; 
+
+
         public PassportListViewModel()
         {
             Passports = new ObservableCollection<Passport>();
@@ -30,17 +60,31 @@ namespace PassportApp.ViewModels
             var passport4 = new Models.Passport("Danials", "Behzad", new DateTime(2001, 04, 15), "Iran");
             Passports.Add(passport4);
 
-            TravelCommand = new DelegateCommand(Travel);
+            TravelCommand = new DelegateCommand(Travel,CanTravel);
 
         }
 
-        private void Travel(Object _)
+        /// <summary>
+        /// Method responsible to call travel method in passport. 
+        /// </summary>
+        /// <param name="_"></param>
+        private void Travel(object _)
         {
-            if(SelectedPassport is not null || !String.IsNullOrWhiteSpace(DestinationCountry))
-            {
-                SelectedPassport.Travelling(DestinationCountry, DateTime.Now);
-            }
+          
+            SelectedPassport.Travelling(DestinationCountry, DateTime.Now);
 
+            //Clear Fiel 
+            DestinationCountry = string.Empty;
+
+            //Updating the View
+            NotifyPropertyChanged(nameof(DestinationCountry)); 
+
+
+        }
+
+        private bool CanTravel(object _)
+        {
+            return SelectedPassport is not null && !string.IsNullOrWhiteSpace(DestinationCountry);
         }
     }
 }

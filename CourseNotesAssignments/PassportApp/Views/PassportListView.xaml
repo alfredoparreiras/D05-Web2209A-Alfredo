@@ -24,7 +24,7 @@
                 <DataGridTextColumn Header="Age" IsReadOnly="true" Binding="{Binding Path=GetAge,UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Country" IsReadOnly="true" Binding="{Binding Path=CountryOfResidence,UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Current Location" IsReadOnly="True" Binding="{Binding Path=CurrentLocation,UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Traveling" Binding="{Binding Path=IsTravelling,UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Traveling" IsReadOnly="true" Binding="{Binding Path=IsTravelling,UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Chevalier.Utility.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace PassportApp.Models
 {
-    internal class Passport
+    internal class Passport : ViewModel
     {
         // Calculated Properties 
         public string GetFullName => string.Concat(FirstName," ",LastName);
@@ -92,6 +93,8 @@ namespace PassportApp.Models
         {
             var newTravel = new TravelEvent(this.Id, country, timeOfEntry);
             travelHistory.Add(newTravel);
+            NotifyPropertyChanged(nameof(IsTravelling));
+            NotifyPropertyChanged(nameof(CurrentLocation));
         }
     }
 }
