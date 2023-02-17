@@ -8,11 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Utility\Chevalier.Utility\Chevalier.Utility.csproj" />
+    <Compile Remove="Fonts\**" />
+    <EmbeddedResource Remove="Fonts\**" />
+    <None Remove="Fonts\**" />
+    <Page Remove="Fonts\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fonts\" />
+    <ProjectReference Include="..\Utility\Chevalier.Utility\Chevalier.Utility.csproj" />
   </ItemGroup>
 
 </Project>
