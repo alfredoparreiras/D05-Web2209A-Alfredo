@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Progress.ViewModels;
+using System.Windows.Controls;
 
 namespace Progress.Views
 {
@@ -19,7 +20,10 @@ namespace Progress.Views
             // Create new ProgressViewModel
             // Add event handler method OnTaskFinished and add it to the view model's TaskFinished event
             // Add event handler method OnCommandFailed and add it to the view model's CommandFailed event
-            // Set DataContext to be the view model
+            // Set DataContext to be the view model ok
+
+
+            DataContext = new ProgressViewModel();
         }
 
         // TODO: OnTaskFinished event handler method

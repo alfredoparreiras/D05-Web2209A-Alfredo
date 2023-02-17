@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using Chevalier.Utility.Commands;
 using Chevalier.Utility.ViewModels;
 
@@ -140,7 +141,7 @@ namespace Progress.ViewModels
             // Set Running to false
             // Set Message to "Stopped"
             Running = false;
-            Message = "Stopeed";
+            Message = "Stoped";
         }
 
         private void Random(object _)
@@ -178,6 +179,7 @@ namespace Progress.ViewModels
             {
                 Progress += delta;
             }
+            Thread.Sleep(100);
         }
     }
 }
