@@ -34,14 +34,16 @@ namespace Progress.ViewModels
                     //     Invoke TaskFinished event (to display message box)
                     if(value >= 0 && value < 100)
                     {
+                     
                         progress = value;
+                        NotifyPropertyChanged(nameof(Progress));
                         TaskFinished?.Invoke();
                     }  
                     if(value == 100)
                     {
                         Speed = 0;
                         Message = "Task finished";
-                        TaskFinished.Invoke();
+                        TaskFinished?.Invoke();
                     }
 
                 }
@@ -53,9 +55,10 @@ namespace Progress.ViewModels
             get => speed;
             set
             {
-                if(value >= 0 && value < 100)
+                if(value >= 0 && value <= 100)
                 {
                     speed = value;
+                    NotifyPropertyChanged(nameof(Speed));
                     TaskFinished?.Invoke();
                 }
             }
@@ -72,6 +75,7 @@ namespace Progress.ViewModels
                     // Set running to new value
                     // Notify the UI that the property changed
                     running = value;
+                    NotifyPropertyChanged(nameof(Running));
                 }
 
             }
@@ -88,6 +92,7 @@ namespace Progress.ViewModels
                     // Set message to new value
                     // Notify the UI that the property changed
                     message = value;
+                    NotifyPropertyChanged(nameof(Message));
                 }
             }
         }
@@ -112,7 +117,7 @@ namespace Progress.ViewModels
 
             random = new Random();
             progress = 0;
-            speed = 50;
+            speed = 10;
             running = false;
             message = null;
         }
@@ -131,6 +136,9 @@ namespace Progress.ViewModels
             {
                 Running = true;
                 Message = "Started";
+                Thread updateThread = new Thread(UpdateProgress);
+                updateThread.Start();
+                
             }
                 
         }
@@ -173,13 +181,13 @@ namespace Progress.ViewModels
             //     Increase Progress by the delta
             //     Sleep the thread for a fraction of a second
 
-            int delta = Speed; 
+            decimal delta = Speed;
 
-            if (running)
+            while (running)
             {
                 Progress += delta;
+                Thread.Sleep(1000);  
             }
-            Thread.Sleep(100);
         }
     }
 }

@@ -24,7 +24,8 @@
         
         <DockPanel DockPanel.Dock="Top" MinWidth="300">
             <Label DockPanel.Dock="Left" Content="Speed"/>
-            <Label DockPanel.Dock="Left" Content="0"/>
+            <Separator/>
+            <Label DockPanel.Dock="Left" Content="{Binding Path=Speed}"/>
             <Slider DockPanel.Dock="Right" Value="{Binding Path=Speed}" Minimum="0" Maximum="100" Width="150" Margin="0,5,0,0"/>
         </DockPanel>
 
