@@ -47,13 +47,51 @@ namespace PassportApp.Models
         public string LastName { set; get; }
         public string CountryOfResidence { get; }
         public DateTime DateOfBirth { get; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
         
         // Data Fields 
         private string id; 
         public DateTime PassportCreation;
         private readonly List<TravelEvent> travelHistory;
-    
-        public Passport(string firstName, string lastName, DateTime dateOfBirth, string countryOfResidence)
+
+        public Passport(int id, Passport passport)
+            : this(id, passport.FirstName, passport.LastName, passport.DateOfBirth, passport.CountryOfResidence, passport.DateCreated, passport.DateUpdated)
+        { }
+
+        public Passport(int id, string firstName, string lastName, DateTime dateOfBirth, string countryOfResidence, DateTime dateCreated, DateTime dateUpdated)
+        {
+            this.id = id.ToString();
+
+            //Check if first name can be used as a valid name
+            if(Validations.ValidateName(firstName))
+                this.FirstName = firstName;
+
+            //Check if last name can be used as a valid name
+            if(Validations.ValidateName(lastName))
+                this.LastName = lastName;
+
+            //Check if date of birthe can be used as a valid date;
+            if (Validations.ValidateDateOfBirth(dateOfBirth))
+                this.DateOfBirth = dateOfBirth;
+
+            //Check if country is a valid input
+            if(Validations.ValidateName(countryOfResidence))
+                this.CountryOfResidence = countryOfResidence;   
+        
+            this.DateCreated = dateCreated;
+            this.DateUpdated = dateUpdated;
+            
+            //Creating Travel Event 
+            var initialTravel = new TravelEvent(Id, this.CountryOfResidence, DateTime.UtcNow);
+
+
+            // Adding Travel Event 
+            travelHistory = new List<TravelEvent>();
+            travelHistory.Add(initialTravel);
+            PassportCreation = initialTravel.TimeOfEntry;
+
+        }    public Passport(string firstName, string lastName, DateTime dateOfBirth, string countryOfResidence)
         {
             id = GeneratedID.GenerateId();
 
