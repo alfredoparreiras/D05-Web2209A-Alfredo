@@ -32,20 +32,20 @@ namespace Progress.ViewModels
                     //     Stop running
                     //     Set message to "Task finished"
                     //     Invoke TaskFinished event (to display message box)
-                    if(value >= 0 && value < 100)
+                    if(value >= 0 && value <= 100)
                     {
                      
                         progress = value;
+                        TaskFinished?.Invoke();
                         NotifyPropertyChanged(nameof(Progress));
-                        TaskFinished?.Invoke();
                     }  
-                    if(value == 100)
-                    {
-                        Speed = 0;
-                        Message = "Task finished";
-                        TaskFinished?.Invoke();
-                    }
-
+                }
+                if (Progress >= 100)
+                {
+                    NotifyPropertyChanged(nameof(Progress));
+                    Speed = 0;
+                    Message = "Task finished";
+                    TaskFinished?.Invoke();
                 }
             }
         }
