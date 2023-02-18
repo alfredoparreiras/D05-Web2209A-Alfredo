@@ -1,4 +1,7 @@
-﻿using Progress.ViewModels;
+﻿using Chevalier.Utility.Commands;
+using Progress.ViewModels;
+using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Progress.Views
@@ -23,7 +26,23 @@ namespace Progress.Views
             // Set DataContext to be the view model ok
 
 
-            DataContext = new ProgressViewModel();
+            ProgressViewModel viewModel = new ProgressViewModel();
+            viewModel.TaskFinished += OnTaskFinished;
+            // TODO
+            viewModel.CommandFailed += OnCommandFailed;
+            DataContext = viewModel;
+        }
+
+        private void OnCommandFailed(string message)
+        {
+
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void OnTaskFinished()
+        {
+            MessageBox.Show("Task Finished Successfully", "Finished", MessageBoxButton.OK,MessageBoxImage.Information);
+
         }
 
         // TODO: OnTaskFinished event handler method
@@ -31,9 +50,11 @@ namespace Progress.Views
         // Message = "Task finished successfully!"
         // Title = "Task finished"
 
+
         // TODO: OnCommandFailed event handler method
         // Display message box with OK button and Warning image
         // Message = error message passed by view model
         // Title = "Error"
+     
     }
 }
