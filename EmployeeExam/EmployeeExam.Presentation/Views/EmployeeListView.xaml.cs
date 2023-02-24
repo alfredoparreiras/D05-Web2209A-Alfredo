@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using EmployeeExam.Application.ViewModels;
+using System.Windows.Controls;
 
 namespace EmployeeExam.Presentation.Views
 {
@@ -7,6 +8,7 @@ namespace EmployeeExam.Presentation.Views
         public EmployeeListView()
         {
             InitializeComponent();
+            DataContext = new EmployeeListViewModel();
         }
     }
 }

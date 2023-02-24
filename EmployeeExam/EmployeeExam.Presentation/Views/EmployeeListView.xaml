@@ -133,7 +133,8 @@
                         <Label Content="Hours"
                                DockPanel.Dock="Left"/>
                         <Button Content="Log hours worked"
-                                DockPanel.Dock="Right"/>
+                                DockPanel.Dock="Right"
+                                Command="{Binding Path=LogHoursCommand}"/>
                         <Separator Width="15" DockPanel.Dock="Right"/>
                         <TextBox Text=""
                                  HorizontalContentAlignment="Center"
@@ -146,7 +147,8 @@
                         <Label Content="Raise"
                                DockPanel.Dock="Left"/>
                         <Button Content="Give employee raise"
-                                DockPanel.Dock="Right"/>
+                                DockPanel.Dock="Right"
+                                Command="{Binding Path=EmployeeRaiseCommand}"/>
                         <Separator DockPanel.Dock="Right"/>
                         <TextBox Text=""
                                  HorizontalContentAlignment="Center"
@@ -159,7 +161,8 @@
                         <Label Content="Payment due"
                                DockPanel.Dock="Left"/>
                         <Button Content="Pay employee"
-                                DockPanel.Dock="Right"/>
+                                DockPanel.Dock="Right"
+                                Command="{Binding Path=PayEmployeeCommand}"/>
                         <Separator DockPanel.Dock="Right"/>
                         <TextBlock Text="$0.00"
                                    TextAlignment="Center"
@@ -174,7 +177,8 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center">
 
-                        <Button Content="Remove employee"/>
+                        <Button Content="Remove employee"
+                                Command="{Binding Path=RemoveEmployeeCommand}"/>
 
                     </StackPanel>
 
@@ -268,7 +272,8 @@
 
                         <Button Content="Add employee"
                                 HorizontalAlignment="Right"
-                                Padding="10, 5"/>
+                                Padding="10, 5"
+                                Command="{Binding Path=AddEmployeeCommand}"/>
 
                     </StackPanel>
 
@@ -304,27 +309,45 @@
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   SelectionMode="Single"
-                  MinHeight="200">
+                  MinHeight="200"
+                  ItemsSource="{Binding Path=Employees}"
+                  SelectedItem="{Binding Path=SelectedEmployee}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id"
+                                    Binding="{Binding Path=Id,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Header="First name"
+                                    Binding="{Binding Path=FirstName,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"/>
                 <DataGridTextColumn Header="Last name"
+                                    Binding="{Binding Path=LastName,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"/>
                 <DataGridTextColumn Header="Date of birth"
+                                    Binding="{Binding Path=DateOfBirth,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"/>
                 <DataGridTextColumn Header="Job title"
+                                    Binding="{Binding Path=JobTitle,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"/>
                 <DataGridTextColumn Header="Hourly wage"
+                                    Binding="{Binding Path=HourlyWage,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Header="Hours worked"
+                                    Binding="{Binding Path=HoursWorked,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Header="Payment received"
+                                    Binding="{Binding Path=PaymentReceived,
+                                    UpdateSourceTrigger=PropertyChanged}"
                                     Width="Auto"
                                     IsReadOnly="True"/>
             </DataGrid.Columns>

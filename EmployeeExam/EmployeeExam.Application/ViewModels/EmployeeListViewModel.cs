@@ -10,7 +10,7 @@ namespace EmployeeExam.Application.ViewModels
     public class EmployeeListViewModel : ViewModel, INotifyPropertyChanged
     {
         // TODO: Declare employees collection property
-        public ObservableCollection<Employee> employees { get; }
+        public ObservableCollection<Employee> Employees { get; }
 
         // TODO: Declare other data properties
         public Employee SelectedEmployee
@@ -132,18 +132,42 @@ namespace EmployeeExam.Application.ViewModels
             // Initialize instance variables and properties
             // Load all employees from the database
             var repository = new EmployeeRepository();
-            var employeesList = new List<Employee>();
+            var employeesList = repository.GetEmployees();
             // Store the employees in the collection
-            employees = new ObservableCollection<Employee>(employeesList);
+            Employees = new ObservableCollection<Employee>(employeesList);
 
-            LogHoursCommand = new DelegateCommand(logHoursCommand);
+            LogHoursCommand = new DelegateCommand(logHours);
+            EmployeeRaiseCommand = new DelegateCommand(employeeRaiseC);
+            PayEmployeeCommand = new DelegateCommand(payEmployee);
+            RemoveEmployeeCommand = new DelegateCommand(removeEmployee);
+            AddEmployeeCommand = new DelegateCommand(addEmployee);
         }
 
-        private void logHoursCommand(object obj)
+
+        // TODO: Define command methods
+        private void removeEmployee(object _)
         {
             throw new NotImplementedException();
         }
 
-        // TODO: Define command methods
+        private void addEmployee(object _)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void employeeRaiseC(object _)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void payEmployee(object _)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void logHours(object _)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
