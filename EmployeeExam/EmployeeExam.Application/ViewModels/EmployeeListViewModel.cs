@@ -7,8 +7,11 @@ using EmployeeExam.Persistence.Repositories;
 
 namespace EmployeeExam.Application.ViewModels
 {
+    public delegate void ErrorHandler(string message);
     public class EmployeeListViewModel : ViewModel, INotifyPropertyChanged
     {
+
+        public event ErrorHandler CommandFailed;
         // TODO: Declare employees collection property
         public ObservableCollection<Employee> Employees { get; }
 
@@ -22,7 +25,8 @@ namespace EmployeeExam.Application.ViewModels
             set
             {
                 selectedEmployee = value;
-                //NotifyPropertyChanged(nameof(SelectedEmployee));
+                NotifyPropertyChanged(nameof(SelectedEmployee));
+                PayEmployeeCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -127,18 +131,20 @@ namespace EmployeeExam.Application.ViewModels
         private DateTime dateOfBirth;
         private string jobTitle;
         private decimal hourlyWage;
+        private EmployeeRepository repository;
+        private List<Employee> employeesList;
         public EmployeeListViewModel()
         {
             // Initialize instance variables and properties
             // Load all employees from the database
-            var repository = new EmployeeRepository();
-            var employeesList = repository.GetEmployees();
+            repository = new EmployeeRepository();
+            employeesList = repository.GetEmployees();
             // Store the employees in the collection
             Employees = new ObservableCollection<Employee>(employeesList);
 
             LogHoursCommand = new DelegateCommand(logHours);
             EmployeeRaiseCommand = new DelegateCommand(employeeRaiseC);
-            PayEmployeeCommand = new DelegateCommand(payEmployee);
+            PayEmployeeCommand = new DelegateCommand(payEmployee, canPayEmployee);
             RemoveEmployeeCommand = new DelegateCommand(removeEmployee);
             AddEmployeeCommand = new DelegateCommand(addEmployee);
         }
@@ -147,27 +153,55 @@ namespace EmployeeExam.Application.ViewModels
         // TODO: Define command methods
         private void removeEmployee(object _)
         {
-            throw new NotImplementedException();
+            if(SelectedEmployee != null)
+            {
+                repository.RemoveEmployee(SelectedEmployee);
+                Employees.Remove(SelectedEmployee);
+            }
         }
 
         private void addEmployee(object _)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var employee = new Employee(FirstName, LastName, DateOfBirth, JobTitle, HourlyWage);
+                Employee correct = repository.AddEmployee(employee);
+                Employees.Add(correct);
+            }
+            catch(Exception e)
+            {
+                CommandFailed?.Invoke(e.Message);
+            }
         }
 
         private void employeeRaiseC(object _)
         {
-            throw new NotImplementedException();
+            if(SelectedEmployee != null)
+                SelectedEmployee.GiveRaise(employeeRaise);
         }
 
         private void payEmployee(object _)
         {
-            throw new NotImplementedException();
+            if(SelectedEmployee != null)
+                SelectedEmployee.PayAmountDue();
+        }
+        private bool canPayEmployee(object _)
+        {
+            return SelectedEmployee != null;
         }
 
         private void logHours(object _)
         {
-            throw new NotImplementedException();
+            if (SelectedEmployee != null)
+            {
+                SelectedEmployee.LogHours(hoursWorked);
+                hoursWorked = 0;
+                NotifyPropertyChanged(nameof(hoursWorked));
+            }
+
+         
+            
+           
         }
     }
 }

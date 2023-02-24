@@ -1,8 +1,9 @@
-﻿using EmployeeExam.Domain.Exceptions;
+﻿using Chevalier.Utility.ViewModels;
+using EmployeeExam.Domain.Exceptions;
 
 namespace EmployeeExam.Domain.Entities
 {
-    public class Employee
+    public class Employee : ViewModel
     {
         // TODO: Enforce encapsulation and business rules by:
         // Making property set accessors private, and/or
@@ -23,7 +24,7 @@ namespace EmployeeExam.Domain.Entities
             get
             {
                 // TODO
-                return FirstName + LastName;
+                return FirstName + " " + LastName;
             }
         }
 
@@ -41,7 +42,9 @@ namespace EmployeeExam.Domain.Entities
             get
             {
                 // TODO
-                return HourlyWage * HoursWorked;
+                return Math.Round(HourlyWage * HoursWorked);
+                
+               
             }
         }
 
@@ -123,6 +126,9 @@ namespace EmployeeExam.Domain.Entities
 
             // TODO: If and only if the argument is valid, update the total number of hours worked to reflect the additional hours worked
             HoursWorked += additionalHoursWorked;
+            NotifyPropertyChanged(nameof(HoursWorked));
+            NotifyPropertyChanged(nameof(PaymentDue));
+
         }
 
         /// <exception cref="EmployeeException">If raise percentage is not positive.</exception>
@@ -134,7 +140,8 @@ namespace EmployeeExam.Domain.Entities
                 throw new EmployeeException("Raise Percentage must be a positive value");
 
             // TODO: If and only if the argument is valid, calculate the raise amount and update the hourly wage to reflect the raise
-            HourlyWage = HourlyWage + (HourlyWage * raisePercentage);
+            HourlyWage = HourlyWage + (HourlyWage * raisePercentage / 100);
+            NotifyPropertyChanged(nameof(HourlyWage));
         }
 
         public void PayAmountDue()
@@ -142,8 +149,11 @@ namespace EmployeeExam.Domain.Entities
             // TODO: Pay the employee for all unpaid hours by updating the number of hours paid and the total amount of payment received
             HoursPaid = HoursWorked;
             PaymentReceived = PaymentDue;
-
             HoursWorked = 0;
+
+            NotifyPropertyChanged(nameof(PaymentReceived));
+            NotifyPropertyChanged(nameof(PaymentDue));
+            NotifyPropertyChanged(nameof(HoursPaid));
         }
     }
 }

@@ -50,7 +50,7 @@
 
                     </StackPanel.Resources>
 
-                    <Label Content="No selected employee"
+                    <Label Content="{Binding Path=SelectedEmployee.FullName}"
                             FontSize="14"
                             HorizontalContentAlignment="Center"/>
 
@@ -72,34 +72,34 @@
 
                         <Label Content="Hours worked"
                                Grid.Column="0" Grid.Row="0"/>
-                        <Label Content="0"
+                        <Label Content="{Binding Path=SelectedEmployee.HoursWorked}"
                                Grid.Column="1" Grid.Row="0"/>
 
                         <Label Content="Hours paid"
                                Grid.Column="0" Grid.Row="1"/>
-                        <Label Content="0"
+                        <Label Content="{Binding Path=SelectedEmployee.HoursPaid}"
                                Grid.Column="1" Grid.Row="1"/>
 
                         <Label Content="Hours unpaid"
                                Grid.Column="0" Grid.Row="2"/>
-                        <Label Content="0"
+                        <Label Content="{Binding Path=SelectedEmployee.HoursUnpaid}"
                                Grid.Column="1" Grid.Row="2"/>
 
                         <Label Content="Hourly wage"
                                Grid.Column="0" Grid.Row="3"/>
-                        <Label Content="$0.00"
+                        <Label Content="{Binding Path=SelectedEmployee.HourlyWage}"
                                ContentStringFormat="{}{0:c}"
                                Grid.Column="1" Grid.Row="3"/>
 
                         <Label Content="Payment received"
                                Grid.Column="0" Grid.Row="4"/>
-                        <Label Content="$0.00"
+                        <Label Content="{Binding Path=SelectedEmployee.PaymentReceived}"
                                ContentStringFormat="{}{0:c}"
                                Grid.Column="1" Grid.Row="4"/>
 
                         <Label Content="Payment due"
                                Grid.Column="0" Grid.Row="5"/>
-                        <Label Content="$0.00"
+                        <Label Content="{Binding Path=SelectedEmployee.PaymentDue}"
                                ContentStringFormat="{}{0:c}"
                                Grid.Column="1" Grid.Row="5"/>
 
@@ -136,7 +136,7 @@
                                 DockPanel.Dock="Right"
                                 Command="{Binding Path=LogHoursCommand}"/>
                         <Separator Width="15" DockPanel.Dock="Right"/>
-                        <TextBox Text=""
+                        <TextBox Text="{Binding Path=HoursWorked}"
                                  HorizontalContentAlignment="Center"
                                  DockPanel.Dock="Left"/>
                     </DockPanel>
@@ -150,7 +150,7 @@
                                 DockPanel.Dock="Right"
                                 Command="{Binding Path=EmployeeRaiseCommand}"/>
                         <Separator DockPanel.Dock="Right"/>
-                        <TextBox Text=""
+                        <TextBox Text="{Binding Path=EmployeeRaise}"
                                  HorizontalContentAlignment="Center"
                                  DockPanel.Dock="Left"/>
                     </DockPanel>
@@ -164,7 +164,7 @@
                                 DockPanel.Dock="Right"
                                 Command="{Binding Path=PayEmployeeCommand}"/>
                         <Separator DockPanel.Dock="Right"/>
-                        <TextBlock Text="$0.00"
+                        <TextBlock Text="{Binding Path=SelectedEmployee.PaymentDue}"
                                    TextAlignment="Center"
                                    VerticalAlignment="Center"
                                    MinWidth="60"
@@ -218,7 +218,7 @@
                     </DockPanel.Resources>
 
                     <DockPanel DockPanel.Dock="Top">
-                        <TextBox Text=""
+                        <TextBox Text="{Binding Path=FirstName}"
                                  DockPanel.Dock="Right"/>
                         <Label Content="First name"
                                DockPanel.Dock="Right"/>
@@ -227,7 +227,7 @@
                     <Separator DockPanel.Dock="Top"/>
 
                     <DockPanel DockPanel.Dock="Top">
-                        <TextBox Text=""
+                        <TextBox Text="{Binding Path=LastName}"
                                  DockPanel.Dock="Right"/>
                         <Label Content="Last name"
                                DockPanel.Dock="Right"/>
@@ -236,7 +236,8 @@
                     <Separator DockPanel.Dock="Top"/>
 
                     <DockPanel DockPanel.Dock="Top">
-                        <DatePicker DockPanel.Dock="Right"/>
+                        <DatePicker DockPanel.Dock="Right"
+                                    SelectedDate="{Binding Path=DateOfBirth}"/>
                         <Label Content="Date of birth"
                                DockPanel.Dock="Right"/>
                     </DockPanel>
@@ -244,7 +245,7 @@
                     <Separator DockPanel.Dock="Top"/>
 
                     <DockPanel DockPanel.Dock="Top">
-                        <TextBox Text=""
+                        <TextBox Text="{Binding Path=JobTitle}"
                                  DockPanel.Dock="Right"/>
                         <Label Content="Job title"
                                DockPanel.Dock="Right"/>
@@ -257,7 +258,7 @@
                         <Separator Width="80"
                                    DockPanel.Dock="Right"/>
 
-                        <TextBox Text=""
+                        <TextBox Text="{Binding Path=HourlyWage}"
                                  MinWidth="60" MaxWidth="60"
                                  DockPanel.Dock="Right"/>
 
